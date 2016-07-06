@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <PreferenceCategory
-        android:title="@string/settings_category_notifications"
-        android:key="settings_key_notifications">
+        android:key="@string/settings_key_notifications"
+        android:title="@string/settings_category_notifications">
         <SwitchPreference
-            android:key="settings_key_notifications_switch"
+            android:defaultValue="true"
+            android:key="@string/settings_key_notifications_switch"
             android:summary="@string/settings_summary_notifications_switch"
-            android:title="@string/settings_title_notifications_switch"
-            android:defaultValue="true"/>
+            android:title="@string/settings_title_notifications_switch" />
     </PreferenceCategory>
 </PreferenceScreen>

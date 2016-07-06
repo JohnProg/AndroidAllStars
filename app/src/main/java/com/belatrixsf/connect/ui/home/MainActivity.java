@@ -54,6 +54,7 @@ import com.belatrixsf.connect.ui.common.BelatrixConnectActivity;
 import com.belatrixsf.connect.ui.contacts.ContactsListActivity;
 import com.belatrixsf.connect.ui.login.LoginActivity;
 import com.belatrixsf.connect.ui.ranking.RankingFragmentListener;
+import com.belatrixsf.connect.ui.settings.SettingsActivity;
 import com.belatrixsf.connect.ui.stars.GiveStarActivity;
 import com.belatrixsf.connect.ui.stars.GiveStarFragment;
 import com.belatrixsf.connect.utils.BelatrixConnectApplication;
@@ -72,17 +73,28 @@ public class MainActivity extends BelatrixConnectActivity implements HomeView, R
     public static final int RQ_GIVE_STAR = 99;
     public static final int RANKING_TAB = 1;
 
-    @Inject HomePresenter homePresenter;
+    @Inject
+    HomePresenter homePresenter;
 
-    @Bind(R.id.drawer) DrawerLayout drawerLayout;
-    @Bind(R.id.navigation) NavigationView navigationView;
-    @Bind(R.id.menu_logout) TextView menuLogoutTextView;
-    @Bind(R.id.app_bar_layout) AppBarLayout appBarLayout;
-    @Nullable @Bind(R.id.tab_layout) TabLayout tabLayout;
-    @Bind(R.id.main_view_pager) ViewPager mainViewPager;
-    @Bind(R.id.start_recommendation) FloatingActionButton startRecommendationButton;
-    @Bind(R.id.main_coordinator) CoordinatorLayout coordinatorLayout;
-    @Bind(R.id.bottom_navigation) AHBottomNavigation bottomNavigation;
+    @Bind(R.id.drawer)
+    DrawerLayout drawerLayout;
+    @Bind(R.id.navigation)
+    NavigationView navigationView;
+    @Bind(R.id.menu_logout)
+    TextView menuLogoutTextView;
+    @Bind(R.id.app_bar_layout)
+    AppBarLayout appBarLayout;
+    @Nullable
+    @Bind(R.id.tab_layout)
+    TabLayout tabLayout;
+    @Bind(R.id.main_view_pager)
+    ViewPager mainViewPager;
+    @Bind(R.id.start_recommendation)
+    FloatingActionButton startRecommendationButton;
+    @Bind(R.id.main_coordinator)
+    CoordinatorLayout coordinatorLayout;
+    @Bind(R.id.bottom_navigation)
+    AHBottomNavigation bottomNavigation;
 
     ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -163,7 +175,7 @@ public class MainActivity extends BelatrixConnectActivity implements HomeView, R
 
     }
 
-    private void setupNavigationDrawer(){
+    private void setupNavigationDrawer() {
         menuLogoutTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,11 +184,12 @@ public class MainActivity extends BelatrixConnectActivity implements HomeView, R
             }
         });
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close){
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
             }
+
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -188,14 +201,19 @@ public class MainActivity extends BelatrixConnectActivity implements HomeView, R
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override public boolean onNavigationItemSelected(MenuItem item) {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
                         drawerLayout.closeDrawers();
-                        switch (item.getItemId()){
+                        switch (item.getItemId()) {
                             case R.id.menu_home:
                                 break;
                             case R.id.menu_contacts:
                                 Intent intent = new Intent(MainActivity.this, ContactsListActivity.class);
                                 startActivity(intent);
+                                break;
+                            case R.id.menu_settings:
+                                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                                startActivity(settingsIntent);
                                 break;
                         }
                         return true;
@@ -258,10 +276,10 @@ public class MainActivity extends BelatrixConnectActivity implements HomeView, R
     public void onSupportActionModeStarted(@NonNull ActionMode mode) {
         drawerLayout.closeDrawers();
         appBarLayout.setExpanded(false, true);
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (toolbar != null && toolbar.getLayoutParams() != null){
+                if (toolbar != null && toolbar.getLayoutParams() != null) {
                     AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
                     params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
                     toolbar.setVisibility(View.GONE);
@@ -273,11 +291,11 @@ public class MainActivity extends BelatrixConnectActivity implements HomeView, R
 
     @Override
     public void onSupportActionModeFinished(@NonNull ActionMode mode) {
-        if (toolbar != null && toolbar.getLayoutParams() != null){
+        if (toolbar != null && toolbar.getLayoutParams() != null) {
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
             params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
             appBarLayout.setExpanded(true, true);
-            new Handler().postDelayed(new Runnable(){
+            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     toolbar.setVisibility(View.VISIBLE);

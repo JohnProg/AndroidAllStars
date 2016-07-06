@@ -13,9 +13,9 @@ import com.belatrixsf.connect.R;
  */
 public class SettingsFragment extends PreferenceFragment {
 
-    public static final String NOTIFICATIONS_ENABLED_KEY = "settings_key_notifications_switch";
+    private static final String NOTIFICATIONS_ENABLED_KEY = "settings_key_notifications_switch";
 
-    private SharedPreferences sharedPreferences;
+    private static SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,17 @@ public class SettingsFragment extends PreferenceFragment {
         restorePreviusSettings();
     }
 
+    public static boolean isNotificationEnabled() {
+        if (sharedPreferences.contains(NOTIFICATIONS_ENABLED_KEY))
+            return sharedPreferences.getBoolean(NOTIFICATIONS_ENABLED_KEY, true);
+        else
+            return true;
+    }
+
     private void restorePreviusSettings() {
         if (sharedPreferences.contains(NOTIFICATIONS_ENABLED_KEY)) {
             Preference notificationEnabledPref = findPreference(NOTIFICATIONS_ENABLED_KEY);
-            notificationEnabledPref.setDefaultValue(sharedPreferences.getBoolean(NOTIFICATIONS_ENABLED_KEY,true));
+            notificationEnabledPref.setDefaultValue(sharedPreferences.getBoolean(NOTIFICATIONS_ENABLED_KEY, true));
         }
     }
 }
