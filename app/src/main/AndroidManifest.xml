@@ -58,7 +58,7 @@
             android:theme="@style/Base.Theme.AppCompat"/>
 
         <activity
-            android:name="com.belatrixsf.connect.ui.LauncherActivity">
+            android:name="com.belatrixsf.connect.ui.settings.SettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
